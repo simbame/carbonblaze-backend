@@ -4,8 +4,9 @@
   "description": "",
   "main": "/src/server.ts",
   "scripts": {
-    "dev": "nodemon src/server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts"
   },
   "rds": [],
   "author": "",
@@ -13,19 +14,26 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "pg-promise": "^12.2.0"
+    "pg-promise": "^12.2.0",
+    "cors": "^2.8.5"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/body-parser": "^1.19.6",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.5",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.10.0",
     "@types/nodemon": "^1.19.6",
     "@types/pg-promise": "^0.0.28",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.39.1",
+    "express": "^5.1.0",
+    "install": "^0.13.0",
+    "nodemon": "^3.1.10",
+    "npm": "^11.6.2",
+    "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"

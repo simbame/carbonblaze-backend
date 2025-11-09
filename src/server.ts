@@ -1,24 +1,38 @@
 import express from "express";
 import dotenv from "dotenv";
+const cors = require("cors");
+
 import authRoutes from "./routes/authRoutes";
 import bodyParser = require("body-parser");
 
 dotenv.config();
 const app = express();
 
+const corsOptions = {
+  origin: "http://localhost:3000", // Replace with your Next.js frontend URL
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // If you need to send cookies or authentication headers
+};
+
+app.use(cors(corsOptions));
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the Carbonblaze API");
+});
+
+app.get("/signin", (req, res) => {
+  res.send("Welcome to the Carbonblaze API");
+});
 // create application/json parser
 app.use(bodyParser.json());
-
-// create application/x-www-form-urlencoded parser
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.json());
-app.use("/auth", authRoutes);
+app.use("/api/auth", authRoutes);
+// create application/x-www-form-urlencoded parser
 
-export default app;
-
-const PORT = process.env.PORT || 4000;
-
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+export default app;
