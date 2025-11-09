@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+
 const cors = require("cors");
 
 import authRoutes from "./routes/authRoutes";
