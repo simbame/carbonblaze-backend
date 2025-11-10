@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin: "https://carbonblaze-frontend.vercel.app/", // Replace with your Next.js frontend URL
+  origin: "https://carbonblaze-frontend.vercel.app", // Replace with your Next.js frontend URL
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // If you need to send cookies or authentication headers
 };
