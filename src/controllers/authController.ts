@@ -23,7 +23,6 @@ function findUserByUsername(username: string): Promise<User | null> {
     .query(`SELECT * FROM users WHERE username = $1`, [username])
     .then((users) => users[0] || null);
 
-  console.log(result);
   return result;
 }
 
@@ -32,7 +31,6 @@ function findUserByUserEmail(email: string): Promise<User | null> {
     .query(`SELECT * FROM users WHERE email = $1`, [email])
     .then((users) => users[0] || null);
 
-  console.log(result);
   return result;
 }
 
@@ -87,13 +85,11 @@ export async function register(req: Request, res: Response) {
 
 export async function login(req: Request, res: Response) {
   const { email, password } = req.body;
-  console.log("Login attempt:", req.body);
   if (!email || !password)
     return res.status(400).json({ message: "Username and password required" });
 
   try {
     const user = await findUserByUserEmail(email);
-    console.log("Found user:", user);
     if (user != null && user != undefined) {
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
@@ -109,4 +105,25 @@ export async function login(req: Request, res: Response) {
     console.error("Login error:", err);
     return res.status(401).json({ message: "Invalid credentials" });
   }
+}
+
+export async function dashboard(req: Request, res: Response) {
+  const { useremail } = req.body;
+  findUserByUserEmail(useremail)
+    .then((userByEmail) => {
+      if (userByEmail)
+        return res.status(200).json({
+          message: "User exists",
+          islogged: true,
+        });
+      else {
+        return res.status(404).json({
+          message: "User not found!",
+          islogged: false,
+        });
+      }
+    })
+    .catch((err) => {
+      return res.status(500).json(err);
+    });
 }
